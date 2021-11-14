@@ -1,0 +1,38 @@
+@import url("reset.css");
+
+.champ-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  .champ {
+    max-width: 300px;
+    height: 550px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 20px;
+
+    .name {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+    .title {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .blurb {
+      line-height: 130%;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    img {
+      width: 200px;
+      height: 200px;
+    }
+  }
+}
