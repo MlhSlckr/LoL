@@ -1,5 +1,5 @@
 const champWrapper = document.querySelector(".champ-wrapper");
-
+const searchInput = document.querySelector(".search");
 function getData() {
   fetch(
     "http://ddragon.leagueoflegends.com/cdn/11.22.1/data/tr_TR/champion.json"
@@ -7,7 +7,7 @@ function getData() {
     .then((res) => res.json())
     .then((res) => {
       const name = Object.values(res.data);
-      console.log(res);
+      console.log(name);
       for (let x = 0; x < name.length; x++) {
         champWrapper.innerHTML += `
         <div class='champ'>
@@ -19,6 +19,17 @@ function getData() {
         </div>
         `;
       }
+      searchInput.addEventListener("input", () => {
+        const champNames = document.querySelectorAll(".name");
+        const search = searchInput.value.toLowerCase();
+        champNames.forEach((champName) => {
+          champName.parentElement.style.display = "flex";
+
+          if (!champName.innerHTML.toLowerCase().includes(search)) {
+            champName.parentElement.style.display = "none";
+          }
+        });
+      });
     });
 }
 

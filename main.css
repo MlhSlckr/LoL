@@ -1,5 +1,32 @@
 @import url("reset.css");
-.champ-wrapper {
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.container .search {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  width: 200px;
+  outline: none;
+  border: 1px solid #fff;
+  padding-left: 10px;
+  font-size: 20px;
+  border-radius: 20px;
+}
+
+.container .champ-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -13,7 +40,7 @@
       flex-wrap: wrap;
 }
 
-.champ-wrapper .champ {
+.container .champ-wrapper .champ {
   max-width: 300px;
   height: 550px;
   display: -webkit-box;
@@ -37,30 +64,30 @@
   color: #fff;
 }
 
-.champ-wrapper .champ:hover {
+.container .champ-wrapper .champ:hover {
   background: #203a43;
   -webkit-box-shadow: 0 5px 50px rgba(255, 255, 255, 0.5);
           box-shadow: 0 5px 50px rgba(255, 255, 255, 0.5);
 }
 
-.champ-wrapper .champ .name {
+.container .champ-wrapper .champ .name {
   margin-top: 1rem;
   margin-bottom: 1rem;
   font-size: 2rem;
 }
 
-.champ-wrapper .champ .title {
+.container .champ-wrapper .champ .title {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
-.champ-wrapper .champ .blurb {
-  line-height: 130%;
+.container .champ-wrapper .champ .blurb {
+  line-height: 140%;
   text-align: center;
   margin-bottom: 1rem;
 }
 
-.champ-wrapper .champ img {
+.container .champ-wrapper .champ img {
   width: 200px;
   height: 200px;
 }
