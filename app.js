@@ -187,11 +187,6 @@ function getData() {
         //     </div>
         //   </div
         //   `;
-        clearBtn.addEventListener("click", () => {
-          favWrapper.innerHTML = "";
-          localStorage.removeItem("champs");
-          window.location.reload();
-        });
       }
 
       menuBtn.addEventListener("click", () => {
@@ -201,6 +196,11 @@ function getData() {
         } else {
           body.style.overflow = "auto";
         }
+      });
+      clearBtn.addEventListener("click", (favWrapper) => {
+        favWrapper.innerHTML = "";
+        localStorage.removeItem("champs");
+        window.location.reload();
       });
     });
 }
