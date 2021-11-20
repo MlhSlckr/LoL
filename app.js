@@ -65,17 +65,58 @@ function getData() {
           const title = e.currentTarget.parentElement.children[2].textContent;
           const tag = e.currentTarget.parentElement.children[4].textContent;
           e.currentTarget.classList.toggle("fav");
-          console.log(e.currentTarget);
-          favWrapper.innerHTML += `
-          <div class='wrapper'>
-            <img src="${img}" alt="">
-            <div class='texts'>
-              <h1 class='name'>${name}</h1>
-              <p class='title'>${title}</p>
-              <p class='tag'>${tag}</p>
-            </div>
-          </div
-          `;
+          // favWrapper.innerHTML += `
+          // <div class='wrapper'>
+          //   <img src="${img}" alt="">
+          //   <div class='texts'>
+          //     <h1 class='name'>${name}</h1>
+          //     <p class='title'>${title}</p>
+          //     <p class='tag'>${tag}</p>
+          //   </div>
+          // </div
+          // `;
+
+          const wrapper = document.createElement("div");
+          wrapper.classList.add("wrapper");
+
+          wrapper.addEventListener("click", (e) => {
+            const text = e.currentTarget.children[1].children[0].textContent;
+            console.log(text);
+            e.currentTarget.remove();
+            let champs = JSON.parse(localStorage.getItem("champs"));
+            champs = champs.filter((cp) => cp.text != text);
+            localStorage.setItem("champs", JSON.stringify(champs));
+          });
+
+          const favWrapper = document.createElement("div");
+          favWrapper.classList.add("favorite-champ-wrapper");
+
+          const imgDiv = document.createElement("img");
+          imgDiv.src = img;
+
+          const texts = document.createElement("div");
+          texts.classList.add("texts");
+
+          const nameDiv = document.createElement("h1");
+          nameDiv.classList.add("name");
+          nameDiv.textContent = name;
+
+          const titleDiv = document.createElement("p");
+          titleDiv.classList.add("title");
+          titleDiv.textContent = title;
+
+          const tagDiv = document.createElement("p");
+          tagDiv.classList.add("tag");
+          tagDiv.textContent = tag;
+
+          wrapper.append(imgDiv);
+          wrapper.append(texts);
+          texts.append(nameDiv);
+          texts.append(titleDiv);
+          texts.append(tagDiv);
+          favWrapper.append(wrapper);
+          favorite.append(favWrapper);
+
           const champ = {
             img: img,
             champ: name,
@@ -92,17 +133,7 @@ function getData() {
           stars.push(e.currentTarget.dataset.id);
           localStorage.setItem("stars", JSON.stringify(stars));
         });
-        clearBtn.addEventListener("click", () => {
-          favWrapper.innerHTML = "";
-          localStorage.removeItem("champs");
-          window.location.reload();
-        });
       });
-      if (JSON.parse(localStorage.champs).length === 0) {
-        clearBtn.parentElement.style.display = "none";
-      } else {
-        clearBtn.parentElement.style.display = "flex";
-      }
 
       function addHTML(champ) {
         const wrapper = document.createElement("div");
@@ -156,6 +187,11 @@ function getData() {
         //     </div>
         //   </div
         //   `;
+        clearBtn.addEventListener("click", () => {
+          favWrapper.innerHTML = "";
+          localStorage.removeItem("champs");
+          window.location.reload();
+        });
       }
 
       menuBtn.addEventListener("click", () => {
