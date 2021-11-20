@@ -2,6 +2,7 @@ const champWrapper = document.querySelector(".champ-wrapper");
 const searchInput = document.querySelector(".search");
 const menuBtn = document.querySelector(".menu");
 const favorite = document.querySelector(".favorite");
+const favWrapper = document.querySelector(".favorite-champ-wrapper");
 const body = document.querySelector("body");
 const clearBtn = document.querySelector(".clear");
 
@@ -65,7 +66,7 @@ function getData() {
           const tag = e.currentTarget.parentElement.children[4].textContent;
           e.currentTarget.classList.toggle("fav");
           console.log(e.currentTarget);
-          favorite.innerHTML += `
+          favWrapper.innerHTML += `
           <div class='wrapper'>
             <img src="${img}" alt="">
             <div class='texts'>
@@ -74,9 +75,7 @@ function getData() {
               <p class='tag'>${tag}</p>
             </div>
           </div
-
           `;
-
           const champ = {
             img: img,
             champ: name,
@@ -93,11 +92,22 @@ function getData() {
           stars.push(e.currentTarget.dataset.id);
           localStorage.setItem("stars", JSON.stringify(stars));
         });
+        clearBtn.addEventListener("click", () => {
+          favWrapper.innerHTML = "";
+          localStorage.removeItem("champs");
+          window.location.reload();
+        });
       });
+      if (JSON.parse(localStorage.champs).length === 0) {
+        clearBtn.parentElement.style.display = "none";
+      } else {
+        clearBtn.parentElement.style.display = "flex";
+      }
 
       function addHTML(champ) {
         const wrapper = document.createElement("div");
         wrapper.classList.add("wrapper");
+
         wrapper.addEventListener("click", (e) => {
           const text = e.currentTarget.children[1].children[0].textContent;
           console.log(text);
@@ -106,6 +116,9 @@ function getData() {
           champs = champs.filter((cp) => cp.text != text);
           localStorage.setItem("champs", JSON.stringify(champs));
         });
+
+        const favWrapper = document.createElement("div");
+        favWrapper.classList.add("favorite-champ-wrapper");
 
         const img = document.createElement("img");
         img.src = champ.img;
@@ -130,8 +143,19 @@ function getData() {
         texts.append(name);
         texts.append(title);
         texts.append(tag);
+        favWrapper.append(wrapper);
+        favorite.append(favWrapper);
 
-        favorite.append(wrapper);
+        // favWrapper.innerHTML += `
+        //   <div class='wrapper'>
+        //     <img src="${champ.img}" alt="">
+        //     <div class='texts'>
+        //       <h1 class='name'>${champ.champ}</h1>
+        //       <p class='title'>${champ.title}</p>
+        //       <p class='tag'>${champ.tag}</p>
+        //     </div>
+        //   </div
+        //   `;
       }
 
       menuBtn.addEventListener("click", () => {

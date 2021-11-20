@@ -87,7 +87,7 @@
 }
 
 .container .champ-wrapper .champ:hover {
-  background: #203a43;
+  background: rgba(255, 255, 255, 0.3);
   -webkit-box-shadow: 0 5px 50px rgba(255, 255, 255, 0.5);
           box-shadow: 0 5px 50px rgba(255, 255, 255, 0.5);
 }
@@ -151,7 +151,7 @@
   right: -500px;
   width: 500px;
   height: 100%;
-  background: #000;
+  background: #081c15;
   -webkit-transition: 300ms all;
   transition: 300ms all;
   overflow: auto;
@@ -165,7 +165,37 @@
           flex-direction: column;
 }
 
-.favorite .wrapper {
+.favorite .btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.favorite .btn .clear {
+  text-align: center;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: none;
+  background-color: #d8f3dc;
+  font-size: 18px;
+  -webkit-transition: 300ms all;
+  transition: 300ms all;
+}
+
+.favorite .btn .clear:hover {
+  background-color: #74eb86;
+}
+
+.favorite-champ-wrapper .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -180,35 +210,28 @@
   transition: 300ms all;
 }
 
-.favorite .wrapper:hover {
-  background-color: rgba(255, 255, 255, 0.4);
+.favorite-champ-wrapper .wrapper:hover {
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
-.favorite .wrapper:last-child {
+.favorite-champ-wrapper .wrapper:last-child {
   margin-bottom: 0;
 }
 
-.favorite .wrapper .texts {
+.favorite-champ-wrapper .wrapper .texts {
   margin-left: 1rem;
 }
 
-.favorite .wrapper .texts .name {
+.favorite-champ-wrapper .wrapper .texts .name {
   font-size: 18px;
   padding-bottom: 10px;
 }
 
-.favorite .wrapper .texts .title {
+.favorite-champ-wrapper .wrapper .texts .title {
   padding-bottom: 10px;
 }
 
 .active {
   right: 0px;
-}
-
-.clear {
-  text-align: center;
-  margin-bottom: 2rem;
-  margin-top: 1rem;
-  cursor: pointer;
 }
 /*# sourceMappingURL=main.css.map */
