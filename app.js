@@ -64,6 +64,8 @@ function getData() {
           const title = e.currentTarget.parentElement.children[2].textContent;
           const tag = e.currentTarget.parentElement.children[4].textContent;
           e.currentTarget.classList.toggle("fav");
+          clearBtn.style.display = "flex";
+
           // favWrapper.innerHTML += `
           // <div class='wrapper'>
           //   <img src="${img}" alt="">
@@ -187,12 +189,19 @@ function getData() {
 
       menuBtn.addEventListener("click", () => {
         favorite.classList.toggle("active");
+        const wrapper = document.querySelectorAll(".wrapper");
+        if (wrapper.length === 0) {
+          clearBtn.style.display = "none";
+        } else {
+          clearBtn.style.display = "flex";
+        }
         if (favorite.classList.contains("active")) {
           body.style.overflow = "hidden";
         } else {
           body.style.overflow = "auto";
         }
       });
+
       clearBtn.addEventListener("click", (favWrapper) => {
         favWrapper.innerHTML = "";
         localStorage.removeItem("champs");
@@ -202,9 +211,3 @@ function getData() {
 }
 
 getData();
-
-const wrappers = document.querySelectorAll(".wrapper");
-
-wrappers.forEach((wrapper) => {
-  console.log(wrapper);
-});
