@@ -2,7 +2,6 @@ const champWrapper = document.querySelector(".champ-wrapper");
 const searchInput = document.querySelector(".search");
 const menuBtn = document.querySelector(".menu");
 const favorite = document.querySelector(".favorite");
-const favWrapper = document.querySelector(".favorite-champ-wrapper");
 const body = document.querySelector("body");
 const clearBtn = document.querySelector(".clear");
 
@@ -88,8 +87,7 @@ function getData() {
             localStorage.setItem("champs", JSON.stringify(champs));
           });
 
-          const favWrapper = document.createElement("div");
-          favWrapper.classList.add("favorite-champ-wrapper");
+          const favWrapper = document.querySelector(".favorite-champ-wrapper");
 
           const imgDiv = document.createElement("img");
           imgDiv.src = img;
@@ -115,7 +113,6 @@ function getData() {
           texts.append(titleDiv);
           texts.append(tagDiv);
           favWrapper.append(wrapper);
-          favorite.append(favWrapper);
 
           const champ = {
             img: img,
@@ -148,8 +145,7 @@ function getData() {
           localStorage.setItem("champs", JSON.stringify(champs));
         });
 
-        const favWrapper = document.createElement("div");
-        favWrapper.classList.add("favorite-champ-wrapper");
+        const favWrapper = document.querySelector(".favorite-champ-wrapper");
 
         const img = document.createElement("img");
         img.src = champ.img;
@@ -169,11 +165,11 @@ function getData() {
         tag.classList.add("tag");
         tag.textContent = champ.tag;
 
-        wrapper.append(img);
-        wrapper.append(texts);
         texts.append(name);
         texts.append(title);
         texts.append(tag);
+        wrapper.append(img);
+        wrapper.append(texts);
         favWrapper.append(wrapper);
         favorite.append(favWrapper);
 
@@ -206,3 +202,9 @@ function getData() {
 }
 
 getData();
+
+const wrappers = document.querySelectorAll(".wrapper");
+
+wrappers.forEach((wrapper) => {
+  console.log(wrapper);
+});
