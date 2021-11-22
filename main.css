@@ -85,8 +85,8 @@
 
 .container .champ-wrapper .champ:hover {
   background: rgba(255, 255, 255, 0.3);
-  -webkit-box-shadow: 0 5px 50px rgba(255, 255, 255, 0.5);
-          box-shadow: 0 5px 50px rgba(255, 255, 255, 0.5);
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
 }
 
 .container .champ-wrapper .champ .name {

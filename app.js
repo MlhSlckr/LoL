@@ -54,8 +54,13 @@ function getData() {
       }
 
       startConf();
-
       const stars = document.querySelectorAll(".star");
+      for (let x = 0; x < JSON.parse(localStorage.stars).length; x++) {
+        // console.log(JSON.parse(localStorage.stars)[x]);
+        if (JSON.parse(localStorage.stars)[x] === stars[x].dataset.id) {
+          console.log(stars[x].dataset.id);
+        }
+      }
 
       stars.forEach((star) => {
         star.addEventListener("click", (e) => {
@@ -84,7 +89,6 @@ function getData() {
 
           wrapper.addEventListener("click", (e) => {
             const text = e.currentTarget.children[1].children[0].textContent;
-            console.log(text);
             e.currentTarget.remove();
             let champs = JSON.parse(localStorage.getItem("champs"));
             champs = champs.filter((cp) => cp.text != text);
@@ -193,9 +197,7 @@ function getData() {
         favorite.classList.toggle("active");
         const wrapper = document.querySelectorAll(".wrapper");
         const favWrapper = document.querySelector(".favorite-champ-wrapper");
-        console.log(favWrapper.innerHTML);
         const favTitle = document.querySelector(".favTitle");
-        console.log(favTitle);
         if (!favWrapper.innerHTML.includes("div")) {
           favTitle.style.display = "block";
         } else {
