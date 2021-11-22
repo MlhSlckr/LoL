@@ -64,6 +64,8 @@ function getData() {
           const title = e.currentTarget.parentElement.children[2].textContent;
           const tag = e.currentTarget.parentElement.children[4].textContent;
           e.currentTarget.classList.toggle("fav");
+          const favTitle = document.querySelector(".favTitle");
+          favTitle.style.display = "none";
           clearBtn.style.display = "flex";
 
           // favWrapper.innerHTML += `
@@ -190,6 +192,15 @@ function getData() {
       menuBtn.addEventListener("click", () => {
         favorite.classList.toggle("active");
         const wrapper = document.querySelectorAll(".wrapper");
+        const favWrapper = document.querySelector(".favorite-champ-wrapper");
+        console.log(favWrapper.innerHTML);
+        const favTitle = document.querySelector(".favTitle");
+        console.log(favTitle);
+        if (!favWrapper.innerHTML.includes("div")) {
+          favTitle.style.display = "block";
+        } else {
+          favTitle.style.display = "none";
+        }
         if (wrapper.length === 0) {
           clearBtn.style.display = "none";
         } else {

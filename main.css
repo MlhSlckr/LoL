@@ -235,4 +235,10 @@
 .none {
   display: none;
 }
+
+.favTitle {
+  color: #fff;
+  text-align: center;
+  font-size: 26px;
+}
 /*# sourceMappingURL=main.css.map */
