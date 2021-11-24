@@ -4,6 +4,8 @@ const menuBtn = document.querySelector(".menu");
 const favorite = document.querySelector(".favorite");
 const body = document.querySelector("body");
 const clearBtn = document.querySelector(".clear");
+const popup = document.querySelector(".popup");
+const popupText = document.querySelector(".popup-text");
 
 function getData() {
   fetch(
@@ -22,7 +24,7 @@ function getData() {
           <p class='title'>${name[x].title}</p>
           <p class='blurb'>${name[x].blurb}</p>
           <p class='tag'>${name[x].tags}</p>
-          <i class="fas fa-star star" data-id="${[x]}"></i>
+          <i class="fas fa-star star" data-id="${[x + 1]}"></i>
         </div>
         `;
       }
@@ -54,13 +56,10 @@ function getData() {
       }
 
       startConf();
+
       const stars = document.querySelectorAll(".star");
-      for (let x = 0; x < JSON.parse(localStorage.stars).length; x++) {
-        // console.log(JSON.parse(localStorage.stars)[x]);
-        if (JSON.parse(localStorage.stars)[x] === stars[x].dataset.id) {
-          console.log(stars[x].dataset.id);
-        }
-      }
+
+      // console.log(stars[0].dataset.id);
 
       stars.forEach((star) => {
         star.addEventListener("click", (e) => {
@@ -84,59 +83,80 @@ function getData() {
           // </div
           // `;
 
-          const wrapper = document.createElement("div");
-          wrapper.classList.add("wrapper");
+          if (localStorage.champs.includes(name)) {
+            const favText = document.createElement("p");
+            favText.classList.add("popup-text");
+            favText.innerHTML = `${name} zaten kayıtlı`;
+            popup.append(favText);
+            favText.style.backgroundColor = "tomato";
+            setTimeout(() => {
+              favText.remove();
+            }, 1500);
+          } else {
+            const wrapper = document.createElement("div");
+            wrapper.classList.add("wrapper");
 
-          wrapper.addEventListener("click", (e) => {
-            const text = e.currentTarget.children[1].children[0].textContent;
-            e.currentTarget.remove();
-            let champs = JSON.parse(localStorage.getItem("champs"));
-            champs = champs.filter((cp) => cp.text != text);
+            wrapper.addEventListener("click", (e) => {
+              const text = e.currentTarget.children[1].children[0].textContent;
+              e.currentTarget.remove();
+              let champs = JSON.parse(localStorage.getItem("champs"));
+              champs = champs.filter((cp) => cp.text != text);
+              localStorage.setItem("champs", JSON.stringify(champs));
+            });
+
+            const favWrapper = document.querySelector(
+              ".favorite-champ-wrapper"
+            );
+
+            const imgDiv = document.createElement("img");
+            imgDiv.src = img;
+
+            const texts = document.createElement("div");
+            texts.classList.add("texts");
+
+            const nameDiv = document.createElement("h1");
+            nameDiv.classList.add("name");
+            nameDiv.textContent = name;
+
+            const titleDiv = document.createElement("p");
+            titleDiv.classList.add("title");
+            titleDiv.textContent = title;
+
+            const tagDiv = document.createElement("p");
+            tagDiv.classList.add("tag");
+            tagDiv.textContent = tag;
+
+            wrapper.append(imgDiv);
+            wrapper.append(texts);
+            texts.append(nameDiv);
+            texts.append(titleDiv);
+            texts.append(tagDiv);
+            favWrapper.append(wrapper);
+
+            const champ = {
+              img: img,
+              champ: name,
+              title: title,
+              tag: tag,
+            };
+
+            const champs = JSON.parse(localStorage.getItem("champs"));
+            champs.push(champ);
             localStorage.setItem("champs", JSON.stringify(champs));
-          });
 
-          const favWrapper = document.querySelector(".favorite-champ-wrapper");
+            const star = {};
+            const stars = JSON.parse(localStorage.getItem("stars"));
+            stars.push(e.currentTarget.dataset.id);
+            localStorage.setItem("stars", JSON.stringify(stars));
 
-          const imgDiv = document.createElement("img");
-          imgDiv.src = img;
-
-          const texts = document.createElement("div");
-          texts.classList.add("texts");
-
-          const nameDiv = document.createElement("h1");
-          nameDiv.classList.add("name");
-          nameDiv.textContent = name;
-
-          const titleDiv = document.createElement("p");
-          titleDiv.classList.add("title");
-          titleDiv.textContent = title;
-
-          const tagDiv = document.createElement("p");
-          tagDiv.classList.add("tag");
-          tagDiv.textContent = tag;
-
-          wrapper.append(imgDiv);
-          wrapper.append(texts);
-          texts.append(nameDiv);
-          texts.append(titleDiv);
-          texts.append(tagDiv);
-          favWrapper.append(wrapper);
-
-          const champ = {
-            img: img,
-            champ: name,
-            title: title,
-            tag: tag,
-          };
-
-          const champs = JSON.parse(localStorage.getItem("champs"));
-          champs.push(champ);
-          localStorage.setItem("champs", JSON.stringify(champs));
-
-          const star = {};
-          const stars = JSON.parse(localStorage.getItem("stars"));
-          stars.push(e.currentTarget.dataset.id);
-          localStorage.setItem("stars", JSON.stringify(stars));
+            const favText = document.createElement("p");
+            favText.classList.add("popup-text");
+            favText.innerHTML = `${name} başarıyla kaydedildi`;
+            popup.append(favText);
+            setTimeout(() => {
+              favText.remove();
+            }, 1500);
+          }
         });
       });
 
@@ -224,3 +244,5 @@ function getData() {
 }
 
 getData();
+
+console.log(localStorage.champs);
