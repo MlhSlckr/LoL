@@ -246,6 +246,8 @@
   position: fixed;
   bottom: 5%;
   left: 50%;
+  -webkit-transition: 300ms all;
+  transition: 300ms all;
 }
 
 .popup .popup-text {

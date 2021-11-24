@@ -167,10 +167,12 @@ function getData() {
         wrapper.addEventListener("click", (e) => {
           const text = e.currentTarget.children[1].children[0].textContent;
           console.log(text);
-          e.currentTarget.remove();
           let champs = JSON.parse(localStorage.getItem("champs"));
-          champs = champs.filter((cp) => cp.text != text);
+          console.log(JSON.parse(localStorage.champs));
+          champs = champs.filter((cp) => cp.champ != text);
+          
           localStorage.setItem("champs", JSON.stringify(champs));
+          e.currentTarget.remove();
         });
 
         const favWrapper = document.querySelector(".favorite-champ-wrapper");
@@ -244,5 +246,3 @@ function getData() {
 }
 
 getData();
-
-console.log(localStorage.champs);
