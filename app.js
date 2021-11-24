@@ -9,7 +9,7 @@ const popupText = document.querySelector(".popup-text");
 
 function getData() {
   fetch(
-    "http://ddragon.leagueoflegends.com/cdn/11.22.1/data/tr_TR/champion.json"
+    "http://ddragon.leagueoflegends.com/cdn/11.23.1/data/tr_TR/champion.json"
   )
     .then((res) => res.json())
     .then((res) => {
@@ -170,7 +170,7 @@ function getData() {
           let champs = JSON.parse(localStorage.getItem("champs"));
           console.log(JSON.parse(localStorage.champs));
           champs = champs.filter((cp) => cp.champ != text);
-          
+
           localStorage.setItem("champs", JSON.stringify(champs));
           e.currentTarget.remove();
         });
