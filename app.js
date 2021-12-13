@@ -42,7 +42,6 @@ function getData() {
 
       function startConf() {
         const champs = JSON.parse(localStorage.getItem("champs"));
-        const stars = JSON.parse(localStorage.getItem("stars"));
         if (!champs) {
           localStorage.setItem("champs", JSON.stringify([]));
         } else {
@@ -50,17 +49,53 @@ function getData() {
             addHTML(champ);
           });
         }
-        if (!stars) {
-          localStorage.setItem("stars", JSON.stringify([]));
-        }
       }
 
       startConf();
 
+      function addHTML(champ) {
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("wrapper");
+
+        wrapper.addEventListener("click", (e) => {
+          const text = e.currentTarget.children[1].children[0].textContent;
+          let champs = JSON.parse(localStorage.getItem("champs"));
+          champs = champs.filter((cp) => cp.champ != text);
+
+          localStorage.setItem("champs", JSON.stringify(champs));
+          e.currentTarget.remove();
+        });
+
+        const favWrapper = document.querySelector(".favorite-champ-wrapper");
+
+        const img = document.createElement("img");
+        img.src = champ.img;
+
+        const texts = document.createElement("div");
+        texts.classList.add("texts");
+
+        const name = document.createElement("h1");
+        name.classList.add("name");
+        name.textContent = champ.champ;
+
+        const title = document.createElement("p");
+        title.classList.add("title");
+        title.textContent = champ.title;
+
+        const tag = document.createElement("p");
+        tag.classList.add("tag");
+        tag.textContent = champ.tag;
+
+        texts.append(name);
+        texts.append(title);
+        texts.append(tag);
+        wrapper.append(img);
+        wrapper.append(texts);
+        favWrapper.append(wrapper);
+        favorite.append(favWrapper);
+      }
+
       const stars = document.querySelectorAll(".star");
-
-      // console.log(stars[0].dataset.id);
-
       stars.forEach((star) => {
         star.addEventListener("click", (e) => {
           const name = e.currentTarget.parentElement.children[1].textContent;
@@ -144,11 +179,6 @@ function getData() {
             champs.push(champ);
             localStorage.setItem("champs", JSON.stringify(champs));
 
-            const star = {};
-            const stars = JSON.parse(localStorage.getItem("stars"));
-            stars.push(e.currentTarget.dataset.id);
-            localStorage.setItem("stars", JSON.stringify(stars));
-
             const favText = document.createElement("p");
             favText.classList.add("popup-text");
             favText.innerHTML = `${name} başarıyla kaydedildi`;
@@ -159,61 +189,6 @@ function getData() {
           }
         });
       });
-
-      function addHTML(champ) {
-        const wrapper = document.createElement("div");
-        wrapper.classList.add("wrapper");
-
-        wrapper.addEventListener("click", (e) => {
-          const text = e.currentTarget.children[1].children[0].textContent;
-          console.log(text);
-          let champs = JSON.parse(localStorage.getItem("champs"));
-          console.log(JSON.parse(localStorage.champs));
-          champs = champs.filter((cp) => cp.champ != text);
-
-          localStorage.setItem("champs", JSON.stringify(champs));
-          e.currentTarget.remove();
-        });
-
-        const favWrapper = document.querySelector(".favorite-champ-wrapper");
-
-        const img = document.createElement("img");
-        img.src = champ.img;
-
-        const texts = document.createElement("div");
-        texts.classList.add("texts");
-
-        const name = document.createElement("h1");
-        name.classList.add("name");
-        name.textContent = champ.champ;
-
-        const title = document.createElement("p");
-        title.classList.add("title");
-        title.textContent = champ.title;
-
-        const tag = document.createElement("p");
-        tag.classList.add("tag");
-        tag.textContent = champ.tag;
-
-        texts.append(name);
-        texts.append(title);
-        texts.append(tag);
-        wrapper.append(img);
-        wrapper.append(texts);
-        favWrapper.append(wrapper);
-        favorite.append(favWrapper);
-
-        // favWrapper.innerHTML += `
-        //   <div class='wrapper'>
-        //     <img src="${champ.img}" alt="">
-        //     <div class='texts'>
-        //       <h1 class='name'>${champ.champ}</h1>
-        //       <p class='title'>${champ.title}</p>
-        //       <p class='tag'>${champ.tag}</p>
-        //     </div>
-        //   </div
-        //   `;
-      }
 
       menuBtn.addEventListener("click", () => {
         favorite.classList.toggle("active");
