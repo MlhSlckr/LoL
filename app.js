@@ -13,21 +13,21 @@ function getData() {
   )
     .then((res) => res.json())
     .then((res) => {
-      const name = Object.values(res.data);
-      for (let x = 0; x < name.length; x++) {
+      const champs = Object.values(res.data);
+      console.log(champs);
+
+      champs.map((champ) => {
         champWrapper.innerHTML += `
-        <div class='champ'>
-          <img src="http://ddragon.leagueoflegends.com/cdn/11.22.1/img/champion/${
-            name[x].id
-          }.png" alt="">
-          <h1 class='name'>${name[x].id}</h1>
-          <p class='title'>${name[x].title}</p>
-          <p class='blurb'>${name[x].blurb}</p>
-          <p class='tag'>${name[x].tags}</p>
-          <i class="fas fa-star star" data-id="${[x + 1]}"></i>
-        </div>
-        `;
-      }
+          <div class='champ'>
+            <img src="http://ddragon.leagueoflegends.com/cdn/11.22.1/img/champion/${champ.id}.png" alt="">
+            <h1 class='name'>${champ.id}</h1>
+            <p class='title'>${champ.title}</p>
+            <p class='blurb'>${champ.blurb}</p>
+            <p class='tag'>${champ.tags}</p>
+            <i class="fas fa-star star"></i>
+          </div>
+          `;
+      });
 
       searchInput.addEventListener("input", () => {
         const champNames = document.querySelectorAll(".name");
